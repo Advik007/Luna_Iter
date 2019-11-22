@@ -35,7 +35,7 @@ void SoilMoisture()
 
 void CO2Testing(){
   CO2Error=k30_i2c.readCO2(co2); //Data from CO2 Sensor
-  if(CO2Error == 0){
+  if(CO2Error == 0) {
     lcd.setCursor(0,2); //Column 0, Row 2
     lcd.print("CO2 Content: ");
     lcd.print(co2);
