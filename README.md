@@ -7,7 +7,7 @@ Over time, we will be upgrading our code and connecting more sensor systems over
 ## Circuitry 
 Credits to Circuito.io
 
-![Luna Iter - Isolation Chamber's Circuitry](https://ibb.co/MRj0DnD)
+![Luna Iter - Isolation Chamber's Circuitry](https://github.com/Advik007/Luna-Iter---NYAS-Junior-Academy/blob/master/Luna%20Iter%20-%20Arduino%20Circuitry.png)
 ## Updates
 22/11/2019 - Initial Upload of Pod Code & Isolation Chamber Code
 
