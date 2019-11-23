@@ -10,6 +10,16 @@ Credits to Circuito.io
 ![Luna Iter - Isolation Chamber's Circuitry](https://github.com/Advik007/Luna-Iter---NYAS-Junior-Academy/blob/master/Luna%20Iter%20-%20Arduino%20Circuitry.png)
 
 Circuit Diagram not to Scale - not as per Code as well!
+
+## Materials Required
+1. Arduino MEGA
+2. LM35 - Temperature
+3. Grove Gas Sensor - O2
+4. SparkFun - Soil Moisture Sensor
+5. K3O - CO2 Sensor
+6. Breadboard
+7. Wires
+8. I2C 20x4
 ## Updates
 22/11/2019 - Initial Upload of Pod Code & Isolation Chamber Code
 
