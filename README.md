@@ -34,4 +34,4 @@ Special Thanks to the following sources for their help:
 
 
 ## Conclusion
-With the help of this system and Arduino's electronics, we would simplify life and make it convient during the astronaut's period in the Pod!
+With the help of this system and Arduino's electronics, we would simplify life and make it convenient during the astronaut's period in the Pod!
