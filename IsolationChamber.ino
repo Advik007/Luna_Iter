@@ -2,40 +2,27 @@
 #include <LiquidCrystal_I2C.h>
 #include <K30_I2C.h>
 
-int sensorPin = A5; //Soil Moisture Sensor - for Lunar Regolith
-int sensorValue;  //Soil Moisture Sensor - Variable
 const int O2Sensor = A0; //Attachment of Grove - Gas Sensor (O2) to A0
 const float VRefer = 3.3; //O2 Sensor Voltage - Reference
 float temp; //Temperature - Variable
 int temperaturePin = A3; //Temperature Sensor (LM-35) to A3
-
-K30_I2C k30_i2c = K30_I2C(0x68); //Initalisation of CO2 - Arduino Library
-LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE); //Positions of placement of LCD Screen
-
 int co2 = 0; //CO2 - Variable
 int CO2Error = 1; //CO2 - Reference
+int DCMotorPin= 3; //DC Motor for Ventilation Area Door - intake of CO2 into the chamber using KOH regarded in Deliverable 2
+
+double starttime,starttimec,endtime,endtimec; //MILLIS Function Variables
+
+K30_I2C k30_i2c = K30_I2C(0x68); //Initalisation of CO2 Sensor @ Address - 0x68
+LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE); //Positions of placement of LCD Screen @ Address - 0x27
 
 void setup() {
-    
-  //Soil Moisture Sensor
- Serial.begin(9600); //Initialising of Serial Monitor @ 9600 Hz
- 
-}
-
-void SoilMoisture()
-{
-  sensorValue=analogRead(sensorPin); //Analog Reading of Soil Moisture
-  sensorValue=map(sensorValue,550,10,0,100); //Mapping
-  lcd.setCursor(0,1); //Column 0, Row 1
-  lcd.print("Soil Moisture: "); 
-  lcd.print(sensorValue);
-
-  delay(1000); //Sleep for 1 seconds
+ pinMode(DCMotorPin, OUTPUT);
+ Serial.begin(9600);
 }
 
 void CO2Testing(){
   CO2Error=k30_i2c.readCO2(co2); //Data from CO2 Sensor
-  if(CO2Error == 0) {
+  if(CO2Error == 0){
     lcd.setCursor(0,2); //Column 0, Row 2
     lcd.print("CO2 Content: ");
     lcd.print(co2);
@@ -71,7 +58,6 @@ float O2Content()
     lcd.setCursor(0,3); //Column 0, Row 3
     lcd.print("O2 Content: ");
     lcd.print(Concentration_Percentage);
-    lcd.print("%");
 
     delay(1000); //Sleep for 1 seconds
     
@@ -90,10 +76,31 @@ void TemperatureSet(){
 void loop() {
   lcd.clear(); //Clearing LCD once accomplished
  //Implementation and Calling of Classes
- SoilMoisture();
  CO2Testing();
  O2Content();
  TemperatureSet();
  
+ if(co2<400){ //Test that if CO2 Content is less than 400ppm, open Ventilation Door (KOH)- connected to a Motor to open it up!
+  //estimate that it takes 100 turns to open the door
+  //DC Motor is 150 RPM
+  starttime = millis();
+
+ while ((millis() - starttime) <=(40000)) // Do this loop for up to 40sec
+{
+  int DCspeed = 150; //ClockwiseRPM
+  analogWrite(DCMotorPin, DCspeed);
+ } 
+
+ delay(1000);
+ if(co2>=400){
+  starttimec=millis();
+
+  while((millis()-starttimec)<=40000){ //Do for 40sec
+   int DCSpeed2=-150; //AnticlockwiseRPM
+  analogWrite(DCMotorPin, DCSpeed2);
+  }
+ }
+ 
+ }
 }
 
