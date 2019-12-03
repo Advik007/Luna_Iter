@@ -28,7 +28,7 @@ Circuit Diagram not to Scale - not as per Code as well!
 9. DC Motor (150 RPM)
 
 ## Updates
-22/11/2019 - Initial Upload of Pod Code & Isolation Chamber Code
+22/11/2019 - Initial Upload of Pod Code & Isolation Chamber Code  
 30/11/2019 - If CO2 levels falls below 400ppm, a ventilation door opens, increasing CO2 gradually!
 
 ## Credits
